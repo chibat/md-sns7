@@ -14,6 +14,7 @@ import * as hljs from "highlightjs";
 import { LikeUsersModal } from "~/components/LikeUsersModal.tsx";
 import { markedWithSanitaize } from "~/lib/utils.ts";
 import { useSignal } from "@preact/signals";
+import { trpc } from "~/trpc/client.ts";
 
 export default function PostView(props: { post: Post, user?: AppUser }) {
   const user = props.user;
@@ -58,6 +59,8 @@ export default function PostView(props: { post: Post, user?: AppUser }) {
   }
 
   async function readComments() {
+    const bbb = trpc.postGet.query().then(aaa => { }); laskdjflj
+    const aaa = await trpc.getComments.query({ postId: 1 });
     setCommentLoading(true);
     const results = await request<CommentsRequest, CommentsResponse>("get_comments", { postId: post.id });
     setCommentLoading(false);
