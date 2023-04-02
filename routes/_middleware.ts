@@ -4,13 +4,10 @@ export async function handler(
   _req: Request,
   ctx: MiddlewareHandlerContext,
 ) {
-  const resp = await ctx.next();
-  if (resp.status === 500) {
-    const contentType = resp.headers.get("content-type") || "text/plain";
-    return new Response("503 Service Unavailable", {
-      status: 503,
-      headers: { "content-type": contentType },
-    });
-  }
-  return resp;
+  return new Response(
+    '<body>This Web site has moved. <a href="https://leaves.deno.dev">leaves.deno.dev</a></body>',
+    {
+      headers: { "content-type": "text/html; charset=utf-8" },
+    },
+  );
 }
